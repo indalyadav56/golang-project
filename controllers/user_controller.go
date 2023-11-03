@@ -1,24 +1,94 @@
 package controllers
 
 import (
-	"fmt"
-	models "golang-project/models"
+	"golang-project/models"
+	services "golang-project/services"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/go-playground/validator/v10"
 )
 
-// func GetUsers(c *gin.Context) {
+func GetUsers(c *gin.Context) {
 
-// 	users, err := services.GetUsers()
-// 	if err != nil {
-// 		c.JSON(404,map[string]interface{}{"err": err,})
-// 		return
-// 	}
+	users, err := services.GetUsers()
+	if err != nil {
+		c.JSON(404,map[string]interface{}{"err": err,})
+		return
+	}
 
-// 	c.JSON(200, users)
+	c.JSON(200, users)
+  }
+
+
+  func CreateUser(c *gin.Context) {
+	  var user models.User
+	  if err := c.ShouldBindJSON(&user); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	userData, _ := services.CreateUser(user)
+	c.JSON(http.StatusCreated, userData)
+  }
+
+
+  func UpdateUser(c *gin.Context) {
+	  var user models.User
+	  if err := c.ShouldBindJSON(&user); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	userData, _ := services.UpdateUser(user)
+	c.JSON(http.StatusCreated, userData)
+  }
+
+  
+  func DeleteUser(c *gin.Context) {
+	  var user models.User
+	  if err := c.ShouldBindJSON(&user); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	userData, _ := services.DeleteUser(user)
+	c.JSON(http.StatusCreated, userData)
+  }
+
+
+
+
+
+//   type fieldError struct {
+// 	Field string `json:"field"`
+// 	Error string `json:"error"`
 //   }
+//   func CreateUser2(c *gin.Context) {
+// 	var user models.User
+
+// 	err := c.ShouldBindJSON(&user)
+// 	if err != nil {
+// 	  var errors []fieldError
+// 	  for _, e := range err.(validator.ValidationErrors) {
+// 		errorMessage := cleanValidationError(e)
+// 		errors = append(errors, fieldError{
+// 		  Field: e.Field(),
+// 		  Error: errorMessage,
+// 		})
+// 	  }
+
+// 	  c.JSON(http.StatusBadRequest, gin.H{"errors": errors})
+// 	  return
+// 	}
+// 	DB
+// 	c.JSON(http.StatusOK, gin.H{"message": "User created"})
+//   }
+
+
+  // cleanValidationError is a custom function to extract the error message from the ValidationErrors
+// func cleanValidationError(e validator.FieldError) string {
+	// Extract the error message without the package-specific information
+	// errorMessage := fmt.Sprintf("%s required", e.Field())
+// 	return errorMessage
+// }
+
 
 // func UserRegister(c *gin.Context){
 
@@ -35,37 +105,3 @@ import (
 // user.ID = uuid.New()
 // fmt.Println("Incoming request:-", user.UserName, user.Password)
 // fmt.Println("User ID:", user.ID)
-
-  type fieldError struct {
-	Field string `json:"field"`
-	Error string `json:"error"`
-  }
-
-  func CreateUser(c *gin.Context) {
-	var user models.User
-
-	err := c.ShouldBindJSON(&user)
-	if err != nil {
-
-	  var errors []fieldError
-	  for _, e := range err.(validator.ValidationErrors) {
-		errorMessage := cleanValidationError(e)
-		errors = append(errors, fieldError{
-		  Field: e.Field(),
-		  Error: errorMessage,
-		})
-	  }
-
-	  c.JSON(http.StatusBadRequest, gin.H{"errors": errors})
-	  return
-	}
-
-	c.JSON(http.StatusOK, gin.H{"message": "User created"})
-  }
-
-  // cleanValidationError is a custom function to extract the error message from the ValidationErrors
-func cleanValidationError(e validator.FieldError) string {
-	// Extract the error message without the package-specific information
-	errorMessage := fmt.Sprintf("%s required", e.Field())
-	return errorMessage
-}

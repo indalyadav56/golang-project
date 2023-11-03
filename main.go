@@ -2,48 +2,44 @@ package main
 
 import (
 	"fmt"
-	"os"
 
-	"golang-project/models"
-	routes "golang-project/routes"
+	"golang-project/database"
+	"golang-project/handlers"
+	"golang-project/routes"
+
+	_ "golang-project/docs"
+
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
 )
 
-var db *gorm.DB
 
 func main() {
-	dsn := "host=localhost user=postgres password=postgres dbname=postgres port=5432 sslmode=disable"
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
-
-	// Migrate the schema to the database
-	db.AutoMigrate(&models.User{})
-	
-	godotenv.Load(".env")
+	err := godotenv.Load(".env")
 
 	if err != nil {
 		fmt.Println("Error loading .env file")
 		return
 	}
-    fmt.Println("Env Data", os.Getenv("DB_USER"))
+
+	database.ConnectDB()
+    
 	server := gin.Default()
-
-	// loging
-	server.Use(gin.Logger())
-
-	server.GET("/users/test", func(c *gin.Context) {
-
-		var users []models.User
-		db.Find(&users)
-		
-		c.JSON(200, users)
-	  })
-
+	
 	// routes
+	server.GET("/docs/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	routes.UserRouter(server)
 
+	// websocket
+	server.GET("/test", handlers.WebsocketHandler)
+	
+	server.GET("/ws", handlers.WebSocketConn)
+	server.GET("/ws/chat", handlers.WebSocketConn)
+
 	server.Run()
+	
 }
+

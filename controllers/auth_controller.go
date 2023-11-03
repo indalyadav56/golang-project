@@ -8,5 +8,4 @@ func AuthController(c *gin.Context) {
 		"username": "indalyadv56",
 		"password": "Indal@123",
 	})
-
 }
