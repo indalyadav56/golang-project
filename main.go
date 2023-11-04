@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"golang-project/database"
-	"golang-project/handlers"
 	"golang-project/routes"
+	"golang-project/websocket"
 
 	_ "golang-project/docs"
 
@@ -34,10 +34,7 @@ func main() {
 	routes.UserRouter(server)
 
 	// websocket
-	server.GET("/test", handlers.WebsocketHandler)
-	
-	server.GET("/ws", handlers.WebSocketConn)
-	server.GET("/ws/chat", handlers.WebSocketConn)
+	server.GET("/chat", websocket.Websocket)
 
 	server.Run()
 	
