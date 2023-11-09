@@ -1,7 +1,5 @@
-# Use the official Golang image as the base image
-FROM golang:1.16
+FROM golang:1.18
 
-# Set the working directory inside the container
 WORKDIR /app
 
 # Copy the Go module and Go sum files to the working directory
