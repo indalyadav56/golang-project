@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"golang-project/database"
+	"golang-project/config"
 	"golang-project/routes"
 	"golang-project/websocket"
 
@@ -25,13 +25,14 @@ func main() {
 		return
 	}
 
-	database.ConnectDB()
+	config.ConnectDB()
     
 	server := gin.Default()
 	
 	// routes
-	server.GET("/docs/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	routes.UserRouter(server)
+	
+	server.GET("/docs/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	// websocket
 	server.GET("/chat", websocket.Websocket)

@@ -9,6 +9,12 @@ run:
 init:
 	echo "Docker shouldb be installed in your system $(MONGODB_URL)"
 
+test:
+	go test -cover
+
+kubectl-postgres-start:
+	kubectl apply -f ./k8s/db/postgres.yaml
+
 postgres-start:
 	docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=indal_db -p 5432:5432 -v pgdata:/var/lib/postgresql/data -d postgres
 
