@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
 
@@ -31,3 +32,7 @@ func (u *User) BeforeUpdate() error {
 	u.UpdatedAt = time.Now().UTC()
 	return nil 
 }
+
+func VerifyPassword(hashedPassword, password string) error {
+	return bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password)) 
+  }

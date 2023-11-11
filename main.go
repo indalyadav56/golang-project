@@ -31,6 +31,7 @@ func main() {
 	
 	// routes
 	routes.UserRouter(server)
+	routes.AuthRouter(server)
 	
 	server.GET("/docs/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 

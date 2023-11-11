@@ -2,9 +2,13 @@ package utils
 
 import (
 	"bufio"
+	"golang-project/models"
 	"log"
 	"os"
 	"strings"
+	"time"
+
+	"github.com/golang-jwt/jwt"
 )
 
 // load environment
@@ -32,4 +36,16 @@ func LoadEnv() map[string]string {
   }
 
   return vars
+}
+
+func GenerateToken(user models.User) (string, error) {
+
+  token := jwt.New(jwt.SigningMethodHS256)
+
+  claims := token.Claims.(jwt.MapClaims)
+  claims["authorized"] = true
+  claims["user_id"] = user.ID
+  claims["exp"] = time.Now().Add(time.Hour * 24 * 7).Unix() // 1 week expiration
+
+  return token.SignedString([]byte("secret"))
 }
