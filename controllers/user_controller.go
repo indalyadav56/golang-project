@@ -2,10 +2,11 @@ package controllers
 
 import (
 	"golang-project/models"
-	services "golang-project/services"
+	"golang-project/services"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func GetUsers(c *gin.Context) {
@@ -26,7 +27,20 @@ func GetUsers(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	userData, _ := services.CreateUser(user)
+	
+	hashedPassword, err := hashPassword(user.Password)
+	
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to hash password"})
+		return
+	}
+
+	user.Password = hashedPassword
+	userData, err := services.CreateUser(user)
+
+	if err!= nil{
+		c.JSON(253, gin.H{"error": err.Error()})
+	}
 	c.JSON(http.StatusCreated, userData)
   }
 
@@ -53,7 +67,13 @@ func GetUsers(c *gin.Context) {
   }
 
 
-
+  func hashPassword(password string) (string, error) {
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		return "", err
+	}
+	return string(hashedPassword), nil
+}
 
 
 //   type fieldError struct {

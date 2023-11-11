@@ -12,9 +12,17 @@ func GetUsers() ([]models.User, error) {
 	return users, nil
 }
 
-func CreateUser(u models.User) (models.User, error) {
-	config.DB.Save(&u)
-	return u, nil
+func CreateUser(user models.User) (models.User, error) {
+	
+	err :=config.DB.Create(&user).Error
+  
+	if err != nil {
+		return user, err
+	}
+
+	return user, nil
+	
+	
   }
 
 func UpdateUser(user models.User) (models.User, error) {
