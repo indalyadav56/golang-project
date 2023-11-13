@@ -38,6 +38,8 @@ func LoadEnv() map[string]string {
   return vars
 }
 
+
+// generate token
 func GenerateToken(user models.User) (string, error) {
 
   token := jwt.New(jwt.SigningMethodHS256)
@@ -48,4 +50,12 @@ func GenerateToken(user models.User) (string, error) {
   claims["exp"] = time.Now().Add(time.Hour * 24 * 7).Unix() // 1 week expiration
 
   return token.SignedString([]byte("secret"))
+}
+
+//standard JSON response
+type Response struct {
+	Success bool        `json:"success"`
+	Message string      `json:"message,omitempty"`
+	Error   string      `json:"error,omitempty"`
+	Data    interface{} `json:"data,omitempty"`
 }

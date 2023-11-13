@@ -4,11 +4,13 @@ import (
 	"fmt"
 
 	"golang-project/config"
+	"golang-project/middlewares"
 	"golang-project/routes"
 	"golang-project/websocket"
 
 	_ "golang-project/docs"
 
+	"github.com/gin-contrib/cors"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 
@@ -28,6 +30,14 @@ func main() {
 	config.ConnectDB()
     
 	server := gin.Default()
+
+	// middlewares
+	// Use CORS middleware
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:3000"}
+
+	server.Use(cors.New(config))
+	server.Use(middlewares.AuthMiddleware())
 	
 	// routes
 	routes.UserRouter(server)

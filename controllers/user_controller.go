@@ -3,6 +3,7 @@ package controllers
 import (
 	"golang-project/models"
 	"golang-project/services"
+	"golang-project/utils"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -41,7 +42,14 @@ func GetUsers(c *gin.Context) {
 	if err!= nil{
 		c.JSON(253, gin.H{"error": err.Error()})
 	}
-	c.JSON(http.StatusCreated, userData)
+
+	// Generate and set JWT token
+	token, _ := utils.GenerateToken(user)
+	c.SetSameSite(http.SameSiteLaxMode)
+	c.SetCookie("token", token, 3600 * 24 * 7, "", "", false, true)
+
+
+	c.JSON(http.StatusCreated, gin.H{"data": userData, "token": token})
   }
 
 

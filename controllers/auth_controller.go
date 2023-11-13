@@ -13,10 +13,11 @@ import (
 type LoginResponse struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
-  }
+}
 
 func AuthController(c *gin.Context) {
 	 var loginResponse LoginResponse
+	 
 	 if err := c.ShouldBindJSON(&loginResponse); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
