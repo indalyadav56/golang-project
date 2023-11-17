@@ -33,4 +33,6 @@ redis-remove:
 redis-cli:
 	docker exec -it redis-container redis-cli
 
+# kubectl port-forward pod/myapp-pod 5000:8080
+
 .PHONY: clean test deploy  # set target to cleaning the project

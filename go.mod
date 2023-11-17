@@ -3,6 +3,7 @@ module golang-project
 go 1.18
 
 require (
+	github.com/confluentinc/confluent-kafka-go/v2 v2.3.0
 	github.com/elastic/go-elasticsearch v0.0.0
 	github.com/gin-contrib/cors v1.4.0
 	github.com/gin-gonic/gin v1.9.1
