@@ -1,0 +1,126 @@
+/user-service
+/domain
+  user.go
+  user_repository.go
+/application
+  user_service.go
+  user_controller.go
+/infrastructure
+  user_persistence.go
+  user_messaging.go  
+/interface
+  api/
+    handler.go
+  config.go
+main.go  
+
+/order-service
+/domain
+  order.go
+  order_repository.go
+/application
+  order_service.go
+  order_controller.go
+/infrastructure
+  order_persistence.go
+  order_messaging.go
+/interface
+  api/
+    handler.go
+  config.go
+main.go
+
+
+// domain/user.go
+
+type User struct {
+  ID string
+  Name string
+  Email string
+}
+
+type UserRepository interface {
+  GetUser(id string) (*User, error)
+  SaveUser(user *User) error
+}
+
+// application/user_service.go
+
+type UserService struct {
+  Repo UserRepository 
+}
+
+func (s *UserService) GetUser(id string) (*User, error) {
+  return s.Repo.GetUser(id)
+} 
+
+func (s *UserService) RegisterUser(name, email string) (*User, error) {
+  user := &User{
+    Name: name,
+    Email: email,
+  }
+
+  err := s.Repo.SaveUser(user)
+  if err != nil {
+    return nil, err
+  }
+
+  return user, nil
+}
+
+// infrastructure/user_persistence.go
+
+type PostgresUserRepo struct {}
+
+func (r *PostgresUserRepo) GetUser(id string) (*User, error) {
+  // query DB 
+}
+
+func (r *PostgresUserRepo) SaveUser(user *User) error {
+  // save to DB
+}
+
+// interface/api/handler.go
+
+func RegisterUser(w http.ResponseWriter, r *http.Request) {
+  // get user from request 
+  service.RegisterUser(user.Name, user.Email)
+  // return result
+}
+
+
+src/
+  domain/
+    model/
+      user.js
+      order.js
+    repository/
+      userRepository.js
+      orderRepository.js
+  application/
+    service/
+      userService.js
+      orderService.js
+    controller/
+      userController.js
+      orderController.js
+  infrastructure/
+    data-access/
+      userDao.js
+      orderDao.js
+    messaging/
+      emailSender.js
+      smsSender.js
+  presentation/
+    http/
+      routes.js
+    config.js
+    server.js
+test/
+  unit/
+    domain/
+      user.test.js
+    application/
+      userService.test.js
+  integration/
+    app.int.test.js

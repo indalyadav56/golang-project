@@ -35,4 +35,4 @@ func (u *User) BeforeUpdate() error {
 
 func VerifyPassword(hashedPassword, password string) error {
 	return bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password)) 
-  }
+}
