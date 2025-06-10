@@ -9,13 +9,11 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-
-var upgrader = websocket.Upgrader{
-	CheckOrigin: func(r *http.Request) bool {
-		return true
-	},
-}
-
+// var upgrader = websocket.Upgrader{
+// 	CheckOrigin: func(r *http.Request) bool {
+// 		return true
+// 	},
+// }
 
 type client struct {
 	conn *websocket.Conn
@@ -86,14 +84,14 @@ func (c *client) writePump() {
 }
 
 func handleChat(w http.ResponseWriter, r *http.Request) {
-	conn, err := upgrader.Upgrade(w, r, nil)
-	if err != nil {
-		log.Println(err)
-		return
-	}
+	// conn, err := upgrader.Upgrade(w, r, nil)
+	// if err != nil {
+	// 	log.Println(err)
+	// 	return
+	// }
 
-	client := &client{conn: conn, send: make(chan []byte, 256)}
-	
+	// client := &client{conn: conn, send: make(chan []byte, 256)}
+
 }
 
 func main() {

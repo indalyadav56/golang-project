@@ -1,20 +1,13 @@
 package grpc
 
-import (
-	"context"
-	"log"
-
-	pb "path/to/proto"
-
-	"google.golang.org/grpc"
-)
+// pb "path/to/proto"
 
 func client() {
-  conn, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
+	//   conn, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
 
-  client := pb.NewGreeterClient(conn)
+	//   client := pb.NewGreeterClient(conn)
 
-  response, err := client.SayHello(context.Background(), &pb.HelloRequest{Name: "John"})
-  
-  log.Println(response.Message)
+	//   response, err := client.SayHello(context.Background(), &pb.HelloRequest{Name: "John"})
+
+	// log.Println(response.Message)
 }
