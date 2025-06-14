@@ -1,70 +1,75 @@
 package main
 
-import (
-	"errors"
-	"fmt"
-)
-
-type CustomError struct {
-	ErrorCode string
-	ErrorMsg  string
-	Cause     error `json:"-"` // Not serialized in JSON
-}
-
-func (c *CustomError) Error() string {
-	return c.ErrorMsg
-}
-
-// Unwrap allows unwrapping to get the underlying cause
-func (e *CustomError) Unwrap() error {
-	return e.Cause
-}
-
-type User struct {
-	UserID    int    `json:"userId"`
-	ID        int    `json:"id"`
-	Title     string `json:"title"`
-	Completed bool   `json:"completed"`
-}
+import "fmt"
 
 func main() {
-	// resp, err := http.Get("https://jsonplaceholder.typicode.com/todos/1")
+	// fmt.Println(ReverseString("indal"))
+	// fmt.Println(ReverseArray([6]int{2, 4, 6, 8, 10, 12}))
+	// fmt.Println(isPelindrome(""))
 
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// defer resp.Body.Close()
-
-	// if resp.StatusCode != http.StatusOK {
-	// 	panic("Failed to fetch data: " + resp.Status)
+	// for i := range 10 {
+	// 	fmt.Println(fibonnachi(i))
 	// }
 
-	// byteData, err := io.ReadAll(resp.Body)
-
-	// if err != nil {
-	// 	fmt.Println(err)
-	// }
-
-	// fmt.Println(string(byteData))
-
-	// var userObj User
-	// if err := json.Unmarshal(byteData, &userObj); err != nil {
-	// 	panic(err)
-	// }
-
-	// fmt.Println(userObj.UserID)
-	// fmt.Println(userObj.ID)
-	// fmt.Println(userObj.Title)
-	// fmt.Println(userObj.Completed)
-
-	fmt.Println(GetData().Unwrap())
-
+	fmt.Println(EvenOdd(123))
 }
 
-func GetData() *CustomError {
-	return &CustomError{
-		ErrorCode: "20",
-		ErrorMsg:  "hello this is custom error",
-		Cause:     errors.New("this is error cause for cusotm use"),
+func ReverseString(str string) string {
+	r := []rune(str)
+	left, right := 0, len(r)-1
+
+	for left < right {
+		r[left], r[right] = r[right], r[left]
+
+		left++
+		right--
 	}
+
+	return string(r)
+}
+
+func ReverseArray(arr [6]int) [6]int {
+	left, right := 0, len(arr)-1
+
+	for left < right {
+		arr[left], arr[right] = arr[right], arr[left]
+
+		left++
+		right--
+	}
+
+	return arr
+}
+
+func isPelindrome(str string) bool {
+	if len(str) == 0 {
+		return false
+	}
+
+	left, right := 0, len(str)-1
+
+	for left < right {
+		if str[left] != str[right] {
+			return false
+		}
+
+		left++
+		right--
+	}
+
+	return true
+}
+
+func fibonnachi(num int) int {
+	if num <= 1 {
+		return num
+	}
+	return fibonnachi(num-1) + fibonnachi(num-2)
+}
+
+func EvenOdd(num int) string {
+	if num%2 == 0 {
+		return "this is even"
+	}
+	return "this is odd"
 }

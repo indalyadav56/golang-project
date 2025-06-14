@@ -1,0 +1,1 @@
+go tool compile -S add.go

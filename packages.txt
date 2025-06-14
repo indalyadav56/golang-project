@@ -25,3 +25,5 @@ https://github.com/robfig/cron
 https://github.com/testcontainers/testcontainers-go
 
 https://github.com/joho/godotenv
+
+https://github.com/cespare/xxhash (for xxhash hashing algorithm)

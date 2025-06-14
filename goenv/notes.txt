@@ -1,0 +1,18 @@
+List all available Go versions
+    goenv install -l
+
+Install a specific version of Go
+    goenv install 1.22.0
+    goenv install 1.20.10
+
+Set global (default) Go version
+    goenv global 1.22.0
+
+List all installed versions
+    goenv versions
+
+See which version is currently active
+    goenv version
+
+to set local project
+    goenv local 1.20.10

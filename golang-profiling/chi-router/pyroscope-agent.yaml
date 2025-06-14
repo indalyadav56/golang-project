@@ -1,0 +1,5 @@
+# pyroscope-agent.yaml
+application-name: my.golang.pprof-app
+server-address: http://localhost:4040
+spy-name: pprof
+pprof-url: http://localhost:6060/debug/pprof/profile

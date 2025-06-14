@@ -1,0 +1,24 @@
+to run benchmark with test:-
+    go test -bench=.
+
+without test(only benchmar run):-
+    go test -bench=. -benchmem
+
+to generate report:-
+    go test -bench=. -benchmem -cpuprofile cpu.out
+    go test -bench=. -benchmem -memprofile mem.out
+    go tool pprof -http=:8080 cpu.out
+    go tool pprof -http=:8080 mem.out
+
+
+go tool pprof -http=:9090 http://localhost:6060/debug/pprof/profile\?seconds\=60
+
+
+go tool pprof -http=:9091 http://localhost:6060/debug/pprof/heap\?seconds\=30
+
+
+go tool pprof -http=:9092 http://localhost:6060/debug/pprof/block\?seconds\=30
+
+
+for goroutine:-
+go tool pprof -http=:9093 http://localhost:6060/debug/pprof/goroutine\?seconds\=30
