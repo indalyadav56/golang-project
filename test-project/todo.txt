@@ -1,1 +1,4 @@
 go tool compile -S add.go
+
+
+go test ./services -bench=. -cpuprofile=cpu.prof -memprofile=mem.prof

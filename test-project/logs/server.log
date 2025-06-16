@@ -1,0 +1,2 @@
+{"level":"info","ts":1749901688.885909,"caller":"test-project/main.go:106","msg":"Root handler called"}
+{"level":"info","ts":1749901688.886239,"caller":"test-project/main.go:143","msg":"HTTP Request","method":"GET","path":"/","remote":"[::1]:61337","duration":0.000407583}
