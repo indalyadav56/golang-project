@@ -6,11 +6,11 @@ import (
 )
 
 func main() {
-	myChannel := make(chan int)
+	myChannel := make(chan int, 10)
 
 	wg := &sync.WaitGroup{}
 
-	wg.Add(10)
+	wg.Add(2)
 
 	go func(ch chan int, wg *sync.WaitGroup) {
 		fmt.Println("Channel", <-myChannel)
@@ -20,8 +20,10 @@ func main() {
 	go func(ch chan int, wg *sync.WaitGroup) {
 		myChannel <- 12
 		wg.Done()
+		close(myChannel)
 	}(myChannel, wg)
 
-	fmt.Println("myChannel:", myChannel)
 	fmt.Println("myChannel:", <-myChannel)
+
+	wg.Wait()
 }

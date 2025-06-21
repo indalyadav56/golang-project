@@ -1,0 +1,28 @@
+
+In Go, everything is passed by value — including structs, slices, and maps. But the value itself may contain a reference, which is where things get interesting.
+
+
+map crud(ADD, DELETE, UPDATE, GET)
+loop through using for range
+
+if key not available then return nil not error
+
+nested map
+
+map with struct
+
+struct to map
+
+
+i can use comparable as key
+
+maps are referenece types within funcs
+
+
+join two map into one, merge map
+
+
+multiple goroutines access same key return nil for that use sync.Map
+
+concurrency map
+sync.Map

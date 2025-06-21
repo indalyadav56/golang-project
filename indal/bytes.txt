@@ -1,0 +1,35 @@
+byte (A byte is a unit of bits or binary representation)
+
+// strings to bytes
+
+// byte := 0-255(not more then  only positive)
+
+
+fmt.Printf("%08b",  byte('a')) bytes to bit
+
+slices, array, map, int , rune, into bytes
+
+
+for int, convert to str then to byte 
+
+rune to bytes :-> rune -> strings -> []byte
+
+byte is also a datatype that can hold value 0-255
+
+b := []byte(strconv.Itoa(123)) // 0-2555
+fmt.Println(string(b))
+
+byteData, _ := json.Marshal(map[string]interface{}{})
+
+b := []byte(m)
+
+b[0] = 97	
+
+m = string(b)
+
+fmt.Println(string(b))
+
+explain how content length count and travel over the http request/response
+
+
+AT THE END EVERYTHING WILL BE CONVERTED TO BYTES AND SAVED IN MEMEORY

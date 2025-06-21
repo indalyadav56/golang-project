@@ -1,0 +1,44 @@
+rune, byte, strings, strconv packages, 
+
+	//DEMO =============================
+	// r := rune('😀')
+	// fmt.Println(r, string(r))
+	// // fmt.Println([]byte(string(r)))
+	// fmt.Println(string([]byte(string(r))))
+
+	// //
+	// str := "indal😀"
+
+	// runes := []rune(str)
+
+	// fmt.Println([]byte(string(runes)))
+
+	// "strings are immutable"
+
+	// name := "indal"
+	// // name[0] = 'H'
+	// // fmt.Println(name[1:3])
+	// r := []rune(name)
+	// r[0] = 'H'
+	// fmt.Println(name)
+	// fmt.Println(string(r))
+
+	// "string manipulation "
+
+	// for loop string for i, val := range "123" { fmt.Println(i, val)}
+
+fmt.Println([]rune(strconv.Itoa(123)))
+
+r := rune('😀')
+b := []byte(string(r))
+// 65 - 'A'
+// 97 - 'a'
+fmt.Println(strings.Map(func(r rune) rune {
+		if r >= 'a' && r <= 'z' {
+			r = r - 32
+		}
+		return r
+	}, "indal"))
+
+
+

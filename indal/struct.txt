@@ -1,0 +1,7 @@
+struct is user define custom data types.
+
+struct to map
+
+associates funcs
+
+concurrency safe structs use mutax

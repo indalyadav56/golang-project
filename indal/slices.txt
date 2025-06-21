@@ -1,0 +1,28 @@
+nil vs empty slices
+
+array to slices with slices(custom 1:4)
+
+len(), cap()
+
+
+make([]int, 0, 3)
+after reaching the capicity it work give error, it will grow it
+
+
+append a slice, delete slice
+
+a := []int{1,2,3}
+b := a
+b[0] = 100
+fmt.Println(a) // [100, 2, 3]
+
+slices package
+
+slices.Concat(sli1, sli2)
+
+
+
+s1 := []string{"James", "Wagner", "Christene", "Mike"}
+s2 := []string{"Paul", "Haaland", "Patrick"}
+s3 := []string{"Peter", "Mark", "Luke"}
+s3 = append(append(s1, s2...), s3...)
