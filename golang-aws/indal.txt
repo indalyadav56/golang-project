@@ -1,0 +1,10 @@
+codebase :-> golang, chi  sqlite3
+
+
+this push  in main branch it will invoke the 
+
+triggered
+
+
+seperate script:-> 
+
