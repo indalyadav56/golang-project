@@ -1,8 +1,6 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func main() {
 
@@ -141,14 +139,27 @@ func main() {
 
 	// var pd *int
 
-	slices := []int{1, 2, 3}
+	// slices := []int{1, 2, 3}
 
-	sp := &slices
+	// sp := &slices
 
-	fmt.Println(sp)
+	// fmt.Println(sp)
 
 	// ptr := unsafe.Pointer(&slices[0])
 
+	sl := []int{1, 2, 3}
+
+	fmt.Printf("Before modification slice Addr %p \n", &sl)
+	SlicePointer(&sl)
+	fmt.Printf("After modification slice Addr %p \n", &sl)
+
+}
+
+func SlicePointer(slPtr *[]int) {
+	fmt.Printf("SlicePointer Before mmodification, inner func pointer addr  %p \n", slPtr)
+	fmt.Printf("SlicePointer Before mmodification, inner func pointer addr  %p \n", &slPtr)
+	*slPtr = append(*slPtr, 100, 200, 300)
+	fmt.Printf("SlicePointer After modification, inner func pointer addr  %p \n", &slPtr)
 }
 
 type PointerStuct struct {
