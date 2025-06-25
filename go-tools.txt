@@ -1,0 +1,8 @@
+go generate	Run code generation commands (via //go:generate)
+go tool pprof	Analyze CPU and memory profiles
+go tool trace	Analyze execution trace, concurrency, etc.
+go tool compile	Access low-level compiler operations
+go tool cover	Show test coverage reports
+go tool nm	List symbols in compiled binaries
+go tool objdump	Assembly dump of compiled Go code
+go tool asm	Compile Go assembly code
