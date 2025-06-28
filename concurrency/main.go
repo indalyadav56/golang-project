@@ -1,52 +1,52 @@
-package main
+// package main
 
-func main() {
-	// myChannel := make(chan int, 10)
+// func main() {
+// myChannel := make(chan int, 10)
 
-	// wg := &sync.WaitGroup{}
+// wg := &sync.WaitGroup{}
 
-	// wg.Add(2)
+// wg.Add(2)
 
-	// go func(ch chan int, wg *sync.WaitGroup) {
-	// 	fmt.Println("Channel", <-myChannel)
-	// 	wg.Done()
-	// }(myChannel, wg)
+// go func(ch chan int, wg *sync.WaitGroup) {
+// 	fmt.Println("Channel", <-myChannel)
+// 	wg.Done()
+// }(myChannel, wg)
 
-	// go func(ch chan int, wg *sync.WaitGroup) {
-	// 	myChannel <- 12
-	// 	wg.Done()
-	// 	close(myChannel)
-	// }(myChannel, wg)
+// go func(ch chan int, wg *sync.WaitGroup) {
+// 	myChannel <- 12
+// 	wg.Done()
+// 	close(myChannel)
+// }(myChannel, wg)
 
-	// fmt.Println("myChannel:", <-myChannel)
+// fmt.Println("myChannel:", <-myChannel)
 
-	// wg.Wait()
+// wg.Wait()
 
-	// startTime := time.Now()
+// startTime := time.Now()
 
-	// jobs := make(chan int)
-	// workerNums := 3
+// jobs := make(chan int)
+// workerNums := 3
 
-	// go func() {
-	// 	for i := range 10 {
-	// 		jobs <- i + 1
-	// 	}
+// go func() {
+// 	for i := range 10 {
+// 		jobs <- i + 1
+// 	}
 
-	// 	close(jobs)
-	// }()
+// 	close(jobs)
+// }()
 
-	// wg := sync.WaitGroup{}
+// wg := sync.WaitGroup{}
 
-	// for i := range workerNums {
-	// 	wg.Add(1)
-	// 	go workerPool(i+1, jobs, &wg)
-	// }
+// for i := range workerNums {
+// 	wg.Add(1)
+// 	go workerPool(i+1, jobs, &wg)
+// }
 
-	// wg.Wait()
+// wg.Wait()
 
-	// fmt.Println("time it took to complete:=>", time.Now().Sub(startTime))
+// fmt.Println("time it took to complete:=>", time.Now().Sub(startTime))
 
-}
+// }
 
 // func workerPool(id int, jobs chan int, wg *sync.WaitGroup) {
 // 	defer wg.Done()
@@ -57,3 +57,15 @@ func main() {
 // 	}
 
 // }
+
+package main
+
+// db <- repository, services, handler router server
+func main() {
+
+	// ch := make(chan int, 10)
+	// ch <- 100
+
+	// strings, strconv, reflection , unsafe, pointer, concurrancy, gorooutins, parallelism, os.exit, gomaxprocs
+
+}

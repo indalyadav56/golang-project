@@ -42,22 +42,36 @@ package main
 
 import (
 	"fmt"
-	"time"
+	"runtime"
 )
 
 func process(ch chan string) {
-	ch <- "process successful"
+	for range 10 {
+		ch <- "process successful"
+	}
+}
+
+func process2(ch chan string) {
+	for range 5 {
+		ch <- "process successful"
+	}
 }
 
 func main() {
-	ch := make(chan string)
-	go process(ch)
-	for {
+	runtime.GOMAXPROCS(1)
+
+	ch1 := make(chan string)
+	ch2 := make(chan string)
+
+	go process(ch1)
+	go process2(ch1)
+
+	for range 15 {
 		select {
-		case v := <-ch:
+		case v := <-ch1:
 			fmt.Println("received value: ", v)
-		case <-time.After(time.Second * 10):
-			return
+		case v := <-ch2:
+			fmt.Println("received value: ", v)
 		}
 	}
 

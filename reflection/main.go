@@ -29,5 +29,8 @@ func main() {
 
 	offset := unsafe.Offsetof(MyStruct{}.B)
 	fmt.Println(offset) // Byte offset of field B within the struct
+}
 
+func CreateFunc(s interface{}) {
+	fmt.Println("indal")
 }
